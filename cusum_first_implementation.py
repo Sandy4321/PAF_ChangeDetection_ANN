@@ -1,41 +1,20 @@
 import numpy as np
 from matplotlib import pyplot as plt
-import pandas
-import timetools as tt
-
-
-#Read the csv file
-trace = pandas.read_csv('11017.csv', sep=';', decimal=',')
-try:
-    x = [tt.string_to_datetime(i) for i in trace['epoch']]
-except TypeError:
-    x = [tt.epoch_to_datetime(i) for i in trace['epoch']]
-y = trace['rtt']
-y = y.as_matrix()
-y = y.astype(np.float)
 
 #Method of Liang
-def cusum_Liang(y):
+def cusum_var(y):
     #https://www.researchgate.net/publication/230888065_Cumulative_sum_control_chart
-    '''
-    value1=np.random.normal(0,1,20)
-    value2=np.random.normal(10,1,20)
-    value3=np.random.normal(0,1,20)
-    value4=np.random.normal(10,1,20)
-    value5=np.random.normal(20,1,20)
-    value6=np.random.normal(0,1,20)
-    values=np.concatenate((value1,value2,value3,value4,value5,value6),axis=0)
-    '''
+    
     values = y
     change = [0 for i in range(len(values))]
     Ci_plus=[0 for i  in range(len(values))]
     Ci_moins=[0 for i  in range(len(values))]
     
-    u0=0
-    taux=np.var(value1)
+    u0=y[0]
+    taux=np.var(values)
     print("taux is : "+str(taux))
-    H=5*taux
-    k=5*taux/2
+    H=5*np.sqrt(taux)
+    k=5*np.sqrt(taux)/2
     
     
     for i in range(len(values)-1):
@@ -51,9 +30,12 @@ def cusum_Liang(y):
     print("change is" , change)
     plt.plot(values,'r',change,'o')
     plt.show()
+    return change
 
-#Method of Alberto
-def cusum(values): #Values are the values of the time-serie we are studying.
+
+
+#Method of Alberto -- the first one. We can forget it but we may use it to test the evaluation.
+def cusum_simple(values): #Values are the values of the time-serie we are studying.
     S=0
     average =  np.average(values) #average of the time-serie
     changes = [0 for i in range(len(values))] #Position of the changes.
@@ -71,5 +53,4 @@ def cusum(values): #Values are the values of the time-serie we are studying.
     plt.plot(index,cusum,label='Cusum')
     plt.plot(index,changes,'o',label='Position of the changes')
     plt.show()
-    return
-cusum_Liang(y)
+    return changes
