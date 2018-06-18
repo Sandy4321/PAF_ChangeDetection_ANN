@@ -2,12 +2,12 @@ import pandas
 import timetools as tt
 
 """Parameters of the function could be 
-file_to_the_csv = './example/11017.csv'
+file_to_the_csv = './rtt_series/11017.csv'
 column = 'rtt' #rtt or cp 
 """
 
 #Function
-def csv2list(file_to_the_csv, column)
+def csv2list(file_to_the_csv, column):
     #Read the csv file
     trace = pandas.read_csv(file_to_the_csv, sep=';', decimal=',')
     try:
