@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+div#container {
+  resize: both;
+  height: 70vh;
+  width: 95vw;
+  border:1px solid #999;
+  overflow: scroll;
+}
+
+#graphinfo{
+    border:1px solid #999;
+    max-width: 95vw;
+}
+div.nodetip {
+    position: absolute;
+    text-align: left;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: #fd8d3c;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    display: inline-block;
+}
+div.linktip {
+    position: absolute;
+    text-align: left;
+    font: 12px sans-serif;
+    background: #9ecae1;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    display: inline-block;
+}
+</style>
+
+<body>
+<div class="param" id="input">
+    <input type="text" id="datetime" size="16"/>
+    <input name="updateButton" id ="previous" type="button" value="Prev bin" />
+    <input name="updateButton" id ="next" type="button" value="Next bin" />
+    <input type="file" id="file_input" accept=".json" size="200">
+</div>
+<div id="container">
+    <svg id="graph"></svg>
+</div>
+<pre id="graphinfo"></pre>
+</body>
+
+<script type="text/javascript" src='./js_lib/d3.min.js'></script>
+<script type="text/javascript" src='./js_lib/d3-scale-chromatic.v1.min.js'></script>
+<script type="text/javascript" src="./js_lib/FileSaver.js"></script>
+<script type="text/javascript" src='./js_lib/vis.js'></script>

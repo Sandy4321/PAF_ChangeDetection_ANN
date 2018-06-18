@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+div#container {
+  resize: both;
+  height: 80vh;
+  width: 95vw;
+  border:1px solid #999;
+  overflow: scroll;
+}
+input {
+    margin: 5px
+}
+p#status {
+    font-family: monospace;
+}
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    width: 80px;
+    height: 14px;
+    padding: 2px;
+    font: 10px sans-serif;
+    background: #fd8d3c;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+g#legend {
+    font: 10px sans-serif;
+}
+input[type=file] {
+    width: 400px;
+}
+div.param {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: oblique;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="./js_lib/metricsgraphics.css">
+<body>
+<div class="param" id="date_input">
+    From: <input type="text" id="beginDate" value="2016-10-01 0h" />
+    To: <input type="text" id="endDate" value="2016-10-02 0h"/>  &#9553
+    Min Y: <input type="number" id="min_y" size="4" value="0" />
+    Max Y: <input type="number" id="max_y"  size="4" value="200" />
+    <br>
+    Plot type: <input type="radio" name="plot_type" value="pers"> Perspective
+    <input type="radio" name="plot_type" value="colorline"> Color lines
+    <input type="radio" name="plot_type" value="multi"> Multi-plot  &#9553
+    Plot width: <input type="number" id="plot_width" size=4 value="800" min="100" max="2000" step="1"/>
+    Plot height: <input type="number" id="plot_height" size=4 value="300" min="50" max="800" step="1"/>
+    <div class="param" id="pers_param" style="display: none">
+        Horizontal shift: <input type="number" id="x_step" size=3 value="6" min="0" max="500" step="0.1"/>
+        Vertical shift: <input type="number" id="y_step" size=3 value="4" min="0" max="500" step="0.1"/>
+        Perspective shrink: <input type="number" id="perspective" size=5 value="0.99" step="0.001" min="0.9" max="1"/>
+    </div>
+    <div class="param" id="plot_buttons">
+        <input name="updateButton" id ="update" type="button" value="Plot" />
+        <input name="updateButton" id ="previous" type="button" value="Days before <-" />
+        <input type="number" min="0" max="356" step="1" value="1" id="daystep">
+        <input name="updateButton" id ="next" type="button" value="-> Days after" />  &#9553
+        <input type="file" id="file_input" accept=".json" size="200">
+    </div>
+</div>
+</body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript" src='./js_lib/vis.js'></script>
