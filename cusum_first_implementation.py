@@ -11,10 +11,9 @@ def cusum_var(y):
     Ci_moins=[0 for i  in range(len(values))]
     
     u0=y[0]
-    taux=np.var(values)
-    print("taux is : "+str(taux))
-    H=5*np.sqrt(taux)
-    k=5*np.sqrt(taux)/2
+    var=np.var(values)
+    H=5*np.sqrt(var)
+    k=5*np.sqrt(var)/2
     
     
     for i in range(len(values)-1):
@@ -27,7 +26,6 @@ def cusum_var(y):
             u0=values[i+1]
         else:
             change[i+1]=0
-    print("change is" , change)
     plt.plot(values,'r',change,'o')
     plt.show()
     return change

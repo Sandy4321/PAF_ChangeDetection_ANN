@@ -1,5 +1,6 @@
 import pandas
 import timetools as tt
+import numpy as np
 
 """Parameters of the function could be 
 file_to_the_csv = './rtt_series/11017.csv'
