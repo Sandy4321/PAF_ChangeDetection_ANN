@@ -110,6 +110,50 @@ def Fn_score(n):
     plt.show()
     return
 
+def comparison_precision():
+    precisionC=csv.csv2list('./results/resultCUSUM.csv','precision')
+    precisionB=csv.csv2list('./results/resultBaysian.csv','precision')
+    cdf=[float(k+1)/len(precisionC) for k in range(len(precisionC))]
+    precisionC.sort()
+    precisionB.sort()
+    plt.plot(precisionC,cdf,"r",label="precision of cusum method")
+    plt.plot(precisionB,cdf,"b",label="precision of bayesian method")
+    plt.legend()
+    plt.xlabel("precision")
+    plt.ylabel("cdf")
+    plt.title("comparison of cdf (precision)")
+    plt.show()
+    return
+
+def comparison_recall():
+    recallC=csv.csv2list('./results/resultCUSUM.csv','recall')
+    recallB=csv.csv2list('./results/resultBaysian.csv','recall')
+    cdf=[float(k+1)/len(recallC) for k in range(len(recallC))]
+    recallC.sort()
+    recallB.sort()
+    plt.plot(recallC,cdf,"r",label="recall of cusum method")
+    plt.plot(recallB,cdf,"b",label="recall of bayesian method")
+    plt.legend()
+    plt.xlabel("recall")
+    plt.ylabel("cdf")
+    plt.title("comparison of cdf (recall)")
+    plt.show()
+    return
+
+def recall_precision():
+    precisionC=csv.csv2list('./results/resultCUSUM.csv','precision')
+    precisionB=csv.csv2list('./results/resultBaysian.csv','precision')
+    recallC=csv.csv2list('./results/resultCUSUM.csv','recall')
+    recallB=csv.csv2list('./results/resultBaysian.csv','recall')
+    plt.plot(precisionC,recallC,"rx", label="cusum method")
+    plt.plot(precisionB,recallB,"bx", label="bayesian method")
+    plt.legend()
+    plt.xlabel("precision")
+    plt.ylabel("recall")
+    plt.title("scatterplot (precision,recall)")
+    plt.show()
+    return
+
 #evaluationDataSet("./rtt_series/real_trace_labelled")
         
         
