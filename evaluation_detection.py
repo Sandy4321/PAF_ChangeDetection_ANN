@@ -29,8 +29,8 @@ def evaluationDataSet(folder):
         temp =  eval.evaluation(fact,detectionC)
         precisionC.append(temp["precision"])
         recallC.append(temp["recall"])
-    csv.list2csv('resultBaysian.csv', [file_csv, precisionB, recallB], ['fileName', 'precision', 'recall'])
-    csv.list2csv('resultCUSUM.csv', [file_csv, precisionC, recallC], ['fileName', 'precision', 'recall'])
+    csv.list2csv('./results/resultBaysian.csv', [file_csv, precisionB, recallB], ['fileName', 'precision', 'recall'])
+    csv.list2csv('./results/resultCUSUM.csv', [file_csv, precisionC, recallC], ['fileName', 'precision', 'recall'])
 
 def cdf_precision():
     precision=cusum_evaluation("./rtt_series/real_trace_labelled")[0]
