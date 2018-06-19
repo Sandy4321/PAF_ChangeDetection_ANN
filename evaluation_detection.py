@@ -4,7 +4,7 @@ import cusum_first_implementation as cusum
 import tools.evaluation as eval
 import matplotlib.pyplot as plt
 import numpy as np 
-import baysiancpdetection as baycpd
+import baysiancpdetection as baycpdc #To be removed (commented) if not needed (needs R)
 
 def evaluationDataSet(folder):
     file_csv=os.listdir(folder)
@@ -73,6 +73,40 @@ def cdf_recall_baysian():
     plt.xlabel("recall")
     plt.ylabel("cdf")
     plt.title("cdf of recall for cusum method")
+    plt.show()
+    return
+    
+
+#Function that calculate and plot the Fn measure for both methods (n is generally 1 or 2)
+def Fn_score(n):
+    recallBayesian=csv.csv2list('./results/resultBaysian.csv','recall')
+    precisionBayesian=csv.csv2list('./results/resultBaysian.csv','precision')
+    
+    Fn_bayesian=[]
+    for i in range(len(recallBayesian)):
+        if(recallBayesian[i] != 0 or precisionBayesian[i] != 0):
+            Fn_bayesian.append((1+n*n)*(precisionBayesian[i]*recallBayesian[i])/(n*n*(precisionBayesian[i]+recallBayesian[i])))
+        
+        else:
+            Fn_bayesian.append(0)
+    
+    recallCusum=csv.csv2list('./results/resultCUSUM.csv','recall')
+    precisionCusum=csv.csv2list('./results/resultCUSUM.csv','precision')
+    
+    Fn_cusum=[]
+    for i in range(len(recallCusum)):
+        if(recallCusum[i] != 0 or precisionCusum[i] != 0):
+            Fn_cusum.append((1+n*n)*(precisionCusum[i]*recallCusum[i])/(n*n*(precisionCusum[i]+recallCusum[i])))
+        
+        else:
+            Fn_cusum.append(0)
+    
+    plt.plot(Fn_bayesian,"x",label="Bayesian method")
+    plt.plot(Fn_cusum,"x",label="Cusum method")
+    plt.legend()
+    plt.xlabel("Index of datasets")
+    plt.ylabel("Fn_measure")
+    plt.title("F Score for n="+str(n)+" applied to the results of Bayesian and Cusum methods")
     plt.show()
     return
 
