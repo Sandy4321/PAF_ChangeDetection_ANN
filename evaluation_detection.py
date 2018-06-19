@@ -18,7 +18,7 @@ def cusum_evaluation(folder):
     return precision, recall
 
 def cdf_precision():
-    precision=cusum_evaluation("/Users/rmoal/Desktop/PAF_ChangeDetection_ANN/rtt_series/real_trace_labelled")[0]
+    precision=cusum_evaluation("./rtt_series/real_trace_labelled")[0]
     cdf=[float(k+1)/len(precision) for k in range(len(precision))]
     print cdf
     precision.sort()
