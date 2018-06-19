@@ -9,7 +9,7 @@ def cusum_evaluation(folder):
     precision=[]
     recall=[]
     for f in file_csv:
-        f="./real_trace_labelled/"+f
+        f="./rtt_series/real_trace_labelled/"+f
         reality = csv.csv2list(f,'rtt')
         detection = cusum.cusum_var(reality)
         fact = csv.csv2list(f,'cp')
