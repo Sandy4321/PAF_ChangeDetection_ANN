@@ -10,7 +10,7 @@ import collections
 
 import sys
 import pandas
-import munkres
+#import munkres
 import numpy as np
 
 def evaluation(fact, detection):

@@ -26,8 +26,8 @@ def cusum_var(y):
             u0=values[i+1]
         else:
             change[i+1]=0
-    plt.plot(values,'r',change,'o')
-    plt.show()
+    #plt.plot(values,'r',change,'o')
+    #plt.show()
     return change
 
 
