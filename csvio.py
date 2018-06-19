@@ -18,7 +18,6 @@ def csv2list(filename, column):
 
 #Write
 def list2csv(filename, lists, columns):
+    lists = np.transpose(lists)
     dataFrame = pandas.DataFrame(lists, columns = columns)
     dataFrame.to_csv(filename, index = False, sep = ';', decimal = ',')
-
-#list2csv('test.csv', [[0, 1], [2, 3]], ["rr", "cc"])
