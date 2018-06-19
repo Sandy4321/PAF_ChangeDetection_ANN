@@ -16,5 +16,17 @@ def cusum_evaluation(folder):
         precision.append(eval.evaluation(fact,detection)["precision"])
         recall.append(eval.evaluation(fact,detection)["recall"])
     return precision, recall
-        
+
+def cdf_precision():
+    precision=cusum_evaluation("/Users/rmoal/Desktop/PAF_ChangeDetection_ANN/rtt_series/real_trace_labelled")[0]
+    cdf=[float(k+1)/len(precision) for k in range(len(precision))]
+    print cdf
+    precision.sort()
+    plt.plot(precision,cdf)
+    plt.xlabel("precision")
+    plt.ylabel("cdf")
+    plt.title("cdf of precision for cusum method")
+    plt.show()
+    return
+         
         
