@@ -1,20 +1,37 @@
 import os
-import csvreader as csv
+import csvio
 import cusum_first_implementation as cusum
 import evaluation as eval
 import matplotlib.pyplot as plt
+import numpy as np 
+import baysiancpdetection as baycpd
 
-def cusum_evaluation(folder):
+def evaluationDataSet(folder):
     file_csv=os.listdir(folder)
-    precision=[]
-    recall=[]
+    precisionB=[]
+    recallB=[]
+    precisionC=[]
+    recallC=[]
+
     for f in file_csv:
-        f="./rtt_series/real_trace_labelled/"+f
-        reality = csv.csv2list(f,'rtt')
-        detection = cusum.cusum_var(reality)
-        fact = csv.csv2list(f,'cp')
-        precision.append(eval.evaluation(fact,detection)["precision"])
-        recall.append(eval.evaluation(fact,detection)["recall"])
-    return precision, recall
+        f = "./rtt_series/real_trace_labelled/" + f
+        reality = csvio.csv2list(f,'rtt')
+        
+        detectionB = baycpd.baysiancpt(reality)
+        detectionC = cusum.cusum_var(reality)
+
+        fact = csvio.csv2list(f,'cp')
+
+        temp = eval.evaluation(fact,detectionB)
+        precisionB.append(temp["precision"])
+        recallB.append(temp["recall"])
+
+        temp =  eval.evaluation(fact,detectionC)
+        precisionC.append(temp["precision"])
+        recallC.append(temp["recall"])
+
+    csvio.list2csv('resultBaysian.csv', [file_csv, precisionB, recallB], ['fileName', 'precision', 'recall'])
+    csvio.list2csv('resultCUSUM.csv', [file_csv, precisionC, recallC], ['fileName', 'precision', 'recall'])
+evaluationDataSet("./rtt_series/real_trace_labelled/")
         
         
