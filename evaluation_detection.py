@@ -1,5 +1,5 @@
 import os
-import tools.csvreader as csv
+import tools.csvio as csv
 import cusum_first_implementation as cusum
 import tools.evaluation as eval
 import matplotlib.pyplot as plt
