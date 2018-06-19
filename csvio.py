@@ -21,4 +21,4 @@ def list2csv(filename, lists, columns):
     dataFrame = pandas.DataFrame(lists, columns = columns)
     dataFrame.to_csv(filename, index = False, sep = ';', decimal = ',')
 
-list2csv('test.csv', [[0, 1], [2, 3]], ["rr", "cc"])
+#list2csv('test.csv', [[0, 1], [2, 3]], ["rr", "cc"])
