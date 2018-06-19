@@ -1,5 +1,6 @@
 """
 changedetect.py provides tools for detecting changes in RTT time series
+rpy2 use the changepoint in R
 """
 import numpy as np
 import logging
