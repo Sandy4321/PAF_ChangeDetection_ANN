@@ -2,11 +2,14 @@
 changedetect.py provides tools for detecting changes in RTT time series
 rpy2 use the changepoint in R
 """
+
 import numpy as np
 import logging
+
 from rpy2.rinterface import RRuntimeError
 from rpy2.robjects.packages import importr
 from rpy2.robjects.vectors import IntVector, FloatVector
+
 changepoint = importr('changepoint')
 changepoint_np = importr('changepoint.np')
 

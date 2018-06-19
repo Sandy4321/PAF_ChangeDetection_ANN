@@ -1,7 +1,7 @@
 import os
-import csvio
+import tools.csvio as csv
 import cusum_first_implementation as cusum
-import evaluation as eval
+import tools.evaluation as eval
 import matplotlib.pyplot as plt
 import numpy as np 
 import baysiancpdetection as baycpd
@@ -31,6 +31,18 @@ def evaluationDataSet(folder):
         recallC.append(temp["recall"])
     csvio.list2csv('resultBaysian.csv', [file_csv, precisionB, recallB], ['fileName', 'precision', 'recall'])
     csvio.list2csv('resultCUSUM.csv', [file_csv, precisionC, recallC], ['fileName', 'precision', 'recall'])
-evaluationDataSet("./rtt_series/real_trace_labelled")
+
+def cdf_precision():
+    precision=cusum_evaluation("./rtt_series/real_trace_labelled")[0]
+    cdf=[float(k+1)/len(precision) for k in range(len(precision))]
+    print cdf
+    precision.sort()
+    plt.plot(precision,cdf)
+    plt.xlabel("precision")
+    plt.ylabel("cdf")
+    plt.title("cdf of precision for cusum method")
+    plt.show()
+    return
+#evaluationDataSet("./rtt_series/real_trace_labelled")
         
         
