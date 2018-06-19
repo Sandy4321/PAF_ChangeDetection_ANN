@@ -1,3 +1,5 @@
+"""Example function to get the evaluation of a result"""
+
 import csvreader as csv
 import cusum_first_implementation as cusum
 import evaluation as eval
