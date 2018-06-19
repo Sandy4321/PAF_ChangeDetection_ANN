@@ -36,6 +36,7 @@ def csv2list(filename, column):
 #Write
 
 def list2csv(filename, lists, columns):
+    lists = np.transpose(lists)
 
     dataFrame = pandas.DataFrame(lists, columns = columns)
 
