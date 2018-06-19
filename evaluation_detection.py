@@ -15,12 +15,12 @@ def evaluationDataSet(folder):
 
     for f in file_csv:
         f = folder + '/' + f
-        reality = csvio.csv2list(f,'rtt')
+        reality = csv.csv2list(f,'rtt')
         
         detectionB = baycpd.baysiancpt(reality)
         detectionC = cusum.cusum_var(reality)
 
-        fact = csvio.csv2list(f,'cp')
+        fact = csv.csv2list(f,'cp')
 
         temp = eval.evaluation(fact,detectionB)
         precisionB.append(temp["precision"])
@@ -29,8 +29,8 @@ def evaluationDataSet(folder):
         temp =  eval.evaluation(fact,detectionC)
         precisionC.append(temp["precision"])
         recallC.append(temp["recall"])
-    csvio.list2csv('resultBaysian.csv', [file_csv, precisionB, recallB], ['fileName', 'precision', 'recall'])
-    csvio.list2csv('resultCUSUM.csv', [file_csv, precisionC, recallC], ['fileName', 'precision', 'recall'])
+    csv.list2csv('resultBaysian.csv', [file_csv, precisionB, recallB], ['fileName', 'precision', 'recall'])
+    csv.list2csv('resultCUSUM.csv', [file_csv, precisionC, recallC], ['fileName', 'precision', 'recall'])
 
 def cdf_precision():
     precision=cusum_evaluation("./rtt_series/real_trace_labelled")[0]
@@ -43,6 +43,6 @@ def cdf_precision():
     plt.title("cdf of precision for cusum method")
     plt.show()
     return
-#evaluationDataSet("./rtt_series/real_trace_labelled")
+evaluationDataSet("./rtt_series/real_trace_labelled")
         
         
