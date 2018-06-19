@@ -1,7 +1,7 @@
 import os
-import csvreader as csv
+import tools.csvreader as csv
 import cusum_first_implementation as cusum
-import evaluation as eval
+import tools.evaluation as eval
 import matplotlib.pyplot as plt
 
 def cusum_evaluation(folder):

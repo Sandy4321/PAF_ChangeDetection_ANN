@@ -1,4 +1,4 @@
-import changedetect as cpt
+import tools.changedetect as cpt
 import numpy as np
 
 #This function is to apply the algorithm of Baysian
