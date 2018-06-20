@@ -4,7 +4,7 @@ import cusum_first_implementation as cusum
 import tools.evaluation as eval
 import matplotlib.pyplot as plt
 import numpy as np
-import baysiancpdetection as baycpd #To be removed (commented) if not needed (needs R)
+#import baysiancpdetection as baycpd #To be removed (commented) if not needed (needs R)
 
 
 def evaluationDataSet(folder):
@@ -58,7 +58,7 @@ def evaluationDataSet(folder):
 
 
 def cdf_precision_cusum():
-    precision = csv.csv2list('./results/resultCUSUM.csv', 'precision')
+    precision = csv.csv2list('./results/resultCUSUM_w.csv', 'precision')
     cdf = [float(k+1)/len(precision) for k in range(len(precision))]
     precision.sort()
     plt.plot(precision, cdf)
@@ -70,7 +70,7 @@ def cdf_precision_cusum():
 
 
 def cdf_recall_cusum():
-    recall = csv.csv2list('./results/resultCUSUM.csv', 'recall')
+    recall = csv.csv2list('./results/resultCUSUM_w.csv', 'recall')
     cdf = [float(k+1)/len(recall) for k in range(len(recall))]
     recall.sort()
     plt.plot(recall, cdf)
@@ -82,34 +82,34 @@ def cdf_recall_cusum():
 
 
 def cdf_precision_baysian():
-    precision = csv.csv2list('./results/resultBaysian.csv', 'precision')
+    precision = csv.csv2list('./results/resultBayesian_w.csv', 'precision')
     cdf = [float(k+1)/len(precision) for k in range(len(precision))]
     precision.sort()
     plt.plot(precision, cdf)
     plt.xlabel("precision")
     plt.ylabel("cdf")
-    plt.title("cdf of precision for cusum method")
+    plt.title("cdf of precision for Bayesian method")
     plt.show()
     return
 
 
 def cdf_recall_baysian():
-    recall = csv.csv2list('./results/resultBaysian.csv', 'recall')
+    recall = csv.csv2list('./results/resultBayesian_w.csv', 'recall')
     cdf = [float(k+1)/len(recall) for k in range(len(recall))]
     recall.sort()
     plt.plot(recall, cdf)
     plt.xlabel("recall")
     plt.ylabel("cdf")
-    plt.title("cdf of recall for cusum method")
+    plt.title("cdf of recall for Bayesian method")
     plt.show()
     return
 
 
 # Function that calculate and plot the Fn measure for both methods (n is generally 1 or 2)
 def Fn_score(n):
-    recallBayesian = csv.csv2list('./results/resultBaysian.csv', 'recall')
+    recallBayesian = csv.csv2list('./results/resultBayesian_w.csv', 'recall')
     precisionBayesian = csv.csv2list(
-        './results/resultBaysian.csv', 'precision')
+        './results/resultBayesian_w.csv', 'precision')
 
     Fn_bayesian = []
     for i in range(len(recallBayesian)):
@@ -120,8 +120,8 @@ def Fn_score(n):
         else:
             Fn_bayesian.append(0)
 
-    recallCusum = csv.csv2list('./results/resultCUSUM.csv', 'recall')
-    precisionCusum = csv.csv2list('./results/resultCUSUM.csv', 'precision')
+    recallCusum = csv.csv2list('./results/resultCUSUM_w.csv', 'recall')
+    precisionCusum = csv.csv2list('./results/resultCUSUM_w.csv', 'precision')
 
     Fn_cusum = []
     for i in range(len(recallCusum)):
@@ -144,8 +144,8 @@ def Fn_score(n):
 
 
 def comparison_precision():
-    precisionC = csv.csv2list('./results/resultCUSUM.csv', 'precision')
-    precisionB = csv.csv2list('./results/resultBaysian.csv', 'precision')
+    precisionC = csv.csv2list('./results/resultCUSUM_w.csv', 'precision')
+    precisionB = csv.csv2list('./results/resultBayesian_w.csv', 'precision')
     cdf = [float(k+1)/len(precisionC) for k in range(len(precisionC))]
     precisionC.sort()
     precisionB.sort()
@@ -160,8 +160,8 @@ def comparison_precision():
 
 
 def comparison_recall():
-    recallC = csv.csv2list('./results/resultCUSUM.csv', 'recall')
-    recallB = csv.csv2list('./results/resultBaysian.csv', 'recall')
+    recallC = csv.csv2list('./results/resultCUSUM_w.csv', 'recall')
+    recallB = csv.csv2list('./results/resultBayesian_w.csv', 'recall')
     cdf = [float(k+1)/len(recallC) for k in range(len(recallC))]
     recallC.sort()
     recallB.sort()
@@ -176,10 +176,10 @@ def comparison_recall():
 
 
 def recall_precision():
-    precisionC = csv.csv2list('./results/resultCUSUM.csv', 'precision')
-    precisionB = csv.csv2list('./results/resultBaysian.csv', 'precision')
-    recallC = csv.csv2list('./results/resultCUSUM.csv', 'recall')
-    recallB = csv.csv2list('./results/resultBaysian.csv', 'recall')
+    precisionC = csv.csv2list('./results/resultCUSUM_w.csv', 'precision')
+    precisionB = csv.csv2list('./results/resultBayesian_w.csv', 'precision')
+    recallC = csv.csv2list('./results/resultCUSUM_w.csv', 'recall')
+    recallB = csv.csv2list('./results/resultBayesian_w.csv', 'recall')
     plt.plot(precisionC, recallC, "rx", label="cusum method")
     plt.plot(precisionB, recallB, "bx", label="bayesian method")
     plt.legend()
