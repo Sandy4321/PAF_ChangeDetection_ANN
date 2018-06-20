@@ -4,7 +4,7 @@ import cusum_first_implementation as cusum
 import tools.evaluation as eval
 import matplotlib.pyplot as plt
 import numpy as np 
-import baysiancpdetection as baycpdc #To be removed (commented) if not needed (needs R)
+#import baysiancpdetection as baycpdc #To be removed (commented) if not needed (needs R)
 
 def evaluationDataSet(folder):
     file_csv=os.listdir(folder)
@@ -96,7 +96,7 @@ def Fn_score(n):
     Fn_cusum=[]
     for i in range(len(recallCusum)):
         if(recallCusum[i] != 0 or precisionCusum[i] != 0):
-            Fn_cusum.append((1+n*n)*(precisionCusum[i]*recallCusum[i])/(n*n*(precisionCusum[i]+recallCusum[i])))
+            Fn_cusum.append((1+n*n)*(precisionCusum[i]*recallCusum[i])/(n*n*precisionCusum[i]+recallCusum[i]))
         
         else:
             Fn_cusum.append(0)
