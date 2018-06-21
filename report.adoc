@@ -1,0 +1,12 @@
+# Study of LSTM
+
+## Questions
+. what is batch_size, epoch, unites size
+  
+. how do we set and learn the input/out data dimensions
+
+. what do the different layers mean appart from LSTM, say, Dense, Timedistributed, etc.
+
+. what is an activation function, how to choose
+
+. how to choose loss/cost function.
