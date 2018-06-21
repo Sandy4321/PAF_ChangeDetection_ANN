@@ -8,5 +8,10 @@
 . what do the different layers mean appart from LSTM, say, Dense, Timedistributed, etc.
 
 . what is an activation function, how to choose
-
+ Default: hyperbolic tangent (tanh). If you pass None, no activation is applied (ie. "linear" activation: a(x) = x).
+ We got a significant boost in performance just by using activation function.
+ Positive properties like nonlinearity, differentiability, large value of derivative.
+ It is important to note that there’s no best activation function. One may be better than other in many cases, but will be worse in some other cases.
+ Another important note is that using different activations function doesn’t affect what our network can learn, only how fast (how many data/epochs it needs).
+ https://towardsdatascience.com/exploring-activation-functions-for-neural-networks-73498da59b02
 . how to choose loss/cost function.
