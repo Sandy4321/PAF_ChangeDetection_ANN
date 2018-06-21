@@ -17,4 +17,5 @@ are two implementations of a simple CUSUM method and a Bayesian method to
 detect changes in time-series.
 
 **Report**
-link:report.adoc[Report]
+
+[Report](report.adoc)
