@@ -26,7 +26,10 @@
        out : matrice.
      
 . what do the different layers mean appart from LSTM, say, Dense, Timedistributed, etc.
-      
+
+  Dense layer deal with 2D tensor, and output a 2D tensor
+  TimeDistributedDense layer deal with 3D tensor, and output a 3D tensor.
+  The inner operation is the same y=f(Wx+b) where f(x) is activation function, W and b are weight and bias. While in TimeDistributedDense, the operation is applied to every timestep.
         
 . what is an activation function, how to choose
 
