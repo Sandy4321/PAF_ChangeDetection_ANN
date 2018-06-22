@@ -46,3 +46,6 @@
  https://towardsdatascience.com/exploring-activation-functions-for-neural-networks-73498da59b02
  
 . how to choose loss/cost function.
+
+  loss function: evaluation of the difference of the prediction and real result. The less value of the function is, the better    
+  perfomance is.
