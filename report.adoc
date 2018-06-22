@@ -2,6 +2,16 @@
 
 ## Questions
 . what is batch_size, epoch, unites size
+
+  batch_size: le nombre d'échantillons dans un batch. En effet, quand on veut
+  utiliser un ANN, c'est difficile de passer des données directement. Dans ce cas 
+  là, il faut séparer la dataset en quelque batch.
+  
+  Epoch: quand le dataset total passe ANN une fois et le dataset retourne une fois ,
+  on considère que ce processus est un epoch. 
+  
+  unites size: le nombre de neuron dans chanque hidden layer
+  
   
 . how do we set and learn the input/out data dimensions
 
