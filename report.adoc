@@ -14,22 +14,27 @@
   
   
 . how do we set and learn the input/out data dimensions
+
   Dans le cas Recurrent (RNN,LSTM)
+  
       -Si on veut prédicter une autre série en foncition d'une série.  
        le format de input et output est :
        input: (time_steps, n_samples, dim_inputs)
        output: (time_steps, n_samples, dim_outputs),
        on considère que input et output sont des séquences des vecteurs.
+       
       -Si on veut prédicter une valeur en fonction d'une série
        le format de input et output est :
        input: (time_steps, n_samples, dim_inputs)
        out : matrice.
      
 . what do the different layers mean appart from LSTM, say, Dense, Timedistributed, etc.
-
+  
+  Dense layer in Keras, we consider that the layer is hidden fully connected
   Dense layer deal with 2D tensor, and output a 2D tensor
   TimeDistributedDense layer deal with 3D tensor, and output a 3D tensor.
-  The inner operation is the same y=f(Wx+b) where f(x) is activation function, W and b are weight and bias. While in TimeDistributedDense, the operation is applied to every timestep.
+  The inner operation is the same y=f(Wx+b) where f(x) is activation function, W and b are weight and bias. While in 
+  TimeDistributedDense, the operation is applied to every timestep.
         
 . what is an activation function, how to choose
 
