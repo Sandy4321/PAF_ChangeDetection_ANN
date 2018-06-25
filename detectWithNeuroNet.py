@@ -13,9 +13,10 @@ import neuroNetModelTool as md
 # global config
 #SEQ_LEN = 20
 #N_SAMPLE = 1000
-N_EPOCH = 100
+N_EPOCH = 50
 MTX = ['acc']
-folderName = './rtt_series/dataset_split'
+folderName = './rtt_series/real_trace_labelled'
+#folderName = './example'
 
 # Read data from the folder
 file_csv = os.listdir(folderName)
@@ -61,11 +62,11 @@ data_x = data_x.reshape(N_SAMPLE, SAMPLE_LEN, 1)
 
 # prepare the model
 model = Sequential()
-model.add(Bidirectional(LSTM(15, return_sequences=True), input_shape=(None, 1)))
-model.add(TimeDistributed(Dense(1, activation='sigmoid')))
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=MTX)
-history = model.fit(data_x, data_y, validation_split=0.2,
-                    epochs=N_EPOCH, batch_size=SAMPLE_LEN, verbose=1)
+model.add(Bidirectional(LSTM(15, return_sequences = True), input_shape = (None, 1)))
+model.add(TimeDistributed(Dense(1, activation = 'sigmoid')))
+model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = MTX)
+history = model.fit(data_x, data_y, validation_split = 0.2,
+                    epochs = N_EPOCH, batch_size = SAMPLE_LEN, verbose=1)
 print(model.summary())
 
 md.save_trained_model(model, fn='detectWithNeuroNet')
