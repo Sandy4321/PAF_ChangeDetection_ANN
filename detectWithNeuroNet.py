@@ -13,7 +13,7 @@ import neuroNetModelTool as md
 # global config
 #SEQ_LEN = 20
 #N_SAMPLE = 1000
-N_EPOCH = 100
+N_EPOCH = 20
 MTX = ['acc']
 folderName = './rtt_series/real_trace_labelled'
 
