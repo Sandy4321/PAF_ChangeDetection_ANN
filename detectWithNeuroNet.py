@@ -13,9 +13,9 @@ import neuroNetModelTool as md
 # global config
 #SEQ_LEN = 20
 #N_SAMPLE = 1000
-N_EPOCH = 20
+N_EPOCH = 100
 MTX = ['acc']
-folderName = './rtt_series/real_trace_labelled'
+folderName = './rtt_series/dataset_split'
 
 # Read data from the folder
 file_csv = os.listdir(folderName)
@@ -32,6 +32,11 @@ for f in file_csv:
         SAMPLE_LEN = len(temp)
 N_SAMPLE = len(x)
 
+print('N_SAMPLE = ')
+print(N_SAMPLE)
+
+print('SAMPLE_LEN = ')
+print(SAMPLE_LEN)
 # 0-padding for the samples whose length is less than SAMPLE_LEN
 data_x = []
 data_y = []

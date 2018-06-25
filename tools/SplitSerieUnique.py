@@ -1,24 +1,17 @@
-
 import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-import tools.csvio as csv
-from keras.utils import np_utils
-from keras.models import Sequential
-from keras.layers import SimpleRNN, Activation, Dense
-from keras.optimizers import Adam
 import tools.csvio as csv_t
 import csv
 import os
 import sys
 '''
+Run only once
 to create the fichier of series split with number_x.csv and number_y.csv
 to use this fonction 1. you have to create a folder name "dataset_split"
 2. you have to take all the fichier.csv to the folder "dataset_original". For example 11017.csv.
 '''
 
 length=500
-path_original='./dataset_original/'
+path_original='./tools/dataset_original/'
 path_generate="./dataset_split/"
 flag=0
 for (path_original, dirs, files) in os.walk(path_original):
