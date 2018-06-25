@@ -36,12 +36,12 @@ N_SAMPLE = len(x)
 data_x = []
 data_y = []
 for i in range(len(x)):
-    if len(x[i]) != lentemp:
+    if len(x[i]) != SAMPLE_LEN:
         data_x.extend(x[i].tolist())
-        data_x.extend(np.zeros(lentemp - len(x[i])).tolist())
+        data_x.extend(np.zeros(SAMPLE_LEN - len(x[i])).tolist())
         data_y.extend(y[i].tolist())
         data_y.append(1)
-        data_y.extend(np.zeros(lentemp - len(x[i]) - 1).tolist())
+        data_y.extend(np.zeros(SAMPLE_LEN - len(x[i]) - 1).tolist())
     else:
         data_x.extend(x[i].tolist())
         data_y.extend(y[i].tolist())
@@ -51,8 +51,8 @@ data_x = np.asarray(data_x)
 data_y = np.asarray(data_y)
 
 # Reshape the data set for the input
-data_y = data_y.reshape(N_SAMPLE, lentemp, 1)
-data_x = data_x.reshape(N_SAMPLE, lentemp, 1)
+data_y = data_y.reshape(N_SAMPLE, SAMPLE_LEN, 1)
+data_x = data_x.reshape(N_SAMPLE, SAMPLE_LEN, 1)
 
 # prepare the model
 model = Sequential()
