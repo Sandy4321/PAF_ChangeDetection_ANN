@@ -4,6 +4,7 @@ import csv
 import os
 import sys
 '''
+Run only once
 to create the fichier of series split with number_x.csv and number_y.csv
 to use this fonction 1. you have to create a folder name "dataset_split"
 2. you have to take all the fichier.csv to the folder "dataset_original". For example 11017.csv.
