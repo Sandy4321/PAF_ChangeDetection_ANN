@@ -15,7 +15,7 @@ import neuroNetModelTool as md
 #N_SAMPLE = 1000
 N_EPOCH = 500
 MTX = ['acc']
-folderName = './rtt_series/dataset_split'
+folderName = './rtt_series/artificial_dataset'
 #folderName = './example'
 
 # Read data from the folder
@@ -25,9 +25,9 @@ y = []
 SAMPLE_LEN = 0
 for f in file_csv:
     f = folderName + '/' + f
-    temp = csvio.csv2list(f, 'rtt')
+    temp = csvio.csv2list(f, 'trace', decimal='.', sep=',')
     x.append(temp)
-    y.append(csvio.csv2list(f, 'cp'))
+    y.append(csvio.csv2list(f, 'cpt', decimal='.', sep=','))
     
 #prepare data
 for i in range(len(x)):
