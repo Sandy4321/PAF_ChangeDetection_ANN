@@ -85,5 +85,5 @@ history = model.fit(data_x, data_y, validation_split = 0.2,
                     epochs = N_EPOCH, batch_size = SAMPLE_LEN, verbose=1)
 print(model.summary())
 
-md.save_trained_model(model, fn='detectWithNeuroNet')
-md.plot_leanring_curv(history, fn='detectWithNeuroNet')
+md.save_trained_model(model, fn='detectWithNeuroNetWithPreTreat')
+md.plot_leanring_curv(history, fn='detectWithNeuroNetWithPreTreat')
