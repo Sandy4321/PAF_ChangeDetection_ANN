@@ -4,6 +4,8 @@ from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
 import numpy as np
 import tools.csvio as csvio
+import tools.evaluation as eval
+import os 
 
 # load json and create model
 json_file = open('detectWithNeuroNet.json', 'r')
@@ -14,10 +16,11 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("detectWithNeuroNet.h5")
 print("Loaded model from disk")
 
+
 # Test for an input
 #test = np.array([189.21973,189.105955,189.0866,189.19152,189.18938,189.21477,189.363065,189.060735,189.018825,189.497595,189.460615,194.76307,196.72467,189.280095,189.014585,189.02478,189.03338,189.087215,88.99757,189.041955])
-#test = csvio.csv2list("rtt_series/dataset_split/20xy.csv", "rtt")
-test = csvio.csv2list("rtt_series/artificial_dataset/10.csv", "trace", sep=',', decimal='.')
+#test = csvio.csv2list("rtt_series/real_trace_labelled/11119.csv", "rtt")
+test = csvio.csv2list("rtt_series/artificial_dataset/8.csv", "trace", sep=',', decimal='.')
 testLen = len(test)
 test = test.reshape(1,testLen,1)
 temp = loaded_model.predict(test)
@@ -28,16 +31,50 @@ res = np.zeros(testLen)
 for i in range(testLen):
 	if temp[i] >= 0.5:
 		res[i] = 1
-cp = csvio.csv2list("rtt_series/artificial_dataset/10.csv", "cpt", sep=',', decimal='.')
+cp = csvio.csv2list("rtt_series/artificial_dataset/8.csv", "cpt", sep=',', decimal='.')
 print("cp =")
 print(cp)
+print(sum(cp))
 print("res =")
 print(res)
 print(sum(res))
-
 '''
 # evaluate loaded model on test data
-loaded_model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 score = loaded_model.evaluate(X, Y, verbose=0)
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
+
+
+folderName = './rtt_series/artificial_dataset'
+file_csv = os.listdir(folderName)
+precision = []
+recall = []
+for f in file_csv:
+    fileName = folderName + '/' + f
+    test = csvio.csv2list(fileName, "trace", sep=',', decimal='.')
+    cp = csvio.csv2list(fileName, "cpt", sep=',', decimal='.')
+    testLen = len(test)
+    test = test.reshape(1,testLen,1)
+    temp = loaded_model.predict(test)
+    temp = temp.reshape(testLen)
+    res = np.zeros(testLen)
+
+    for i in range(testLen):
+        if temp[i] >= 0.5:
+            res[i] = 1
+    temp = []
+    for i in range(len(res)):
+        if(res[i] == 1):
+            temp.append(i)
+    res = temp
+    temp = []
+    for i in range(len(cp)):
+        if(cp[i] - 1 < 0.001):
+            temp.append(i)
+    cp = temp
+
+    temp = eval.evaluation_window_adp(cp, res, 2)
+    precision.append(temp["precision"])
+    recall.append(temp["recall"])
+csvio.list2csv('./results/resultNeuroNet_w.csv', [file_csv, precision, recall], ['fileName', 'precision', 'recall'])
 '''
