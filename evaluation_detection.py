@@ -4,7 +4,7 @@ import cusum_first_implementation as cusum
 import tools.evaluation as eval
 import matplotlib.pyplot as plt
 import numpy as np
-#import baysiancpdetection as baycpd #To be removed (commented) if not needed (needs R)
+import baysiancpdetection as baycpd #To be removed (commented) if not needed (needs R)
 
 
 def evaluationDataSet(folder):
@@ -16,11 +16,11 @@ def evaluationDataSet(folder):
 
     for f in file_csv:
         f = folder + '/' + f
-        reality = csv.csv2list(f, 'rtt')
+        reality = csv.csv2list(f, 'trace', sep=',', decimal='.')
 
         detectionB = baycpd.baysiancpt(reality)
         detectionC = cusum.cusum_var(reality)
-        fact = csv.csv2list(f, 'cp')
+        fact = csv.csv2list(f, 'cpt', sep=',', decimal='.')
 
         # Change the binary array to index array
         temp = []
@@ -146,11 +146,14 @@ def Fn_score(n):
 def comparison_precision():
     precisionC = csv.csv2list('./results/resultCUSUM_w.csv', 'precision')
     precisionB = csv.csv2list('./results/resultBayesian_w.csv', 'precision')
+    precisionN = csv.csv2list('./results/resultNeuroNet_w.csv', 'precision',)
     cdf = [float(k+1)/len(precisionC) for k in range(len(precisionC))]
     precisionC.sort()
     precisionB.sort()
+    precisionN.sort()
     plt.plot(precisionC, cdf, "r", label="precision of cusum method")
     plt.plot(precisionB, cdf, "b", label="precision of bayesian method")
+    plt.plot(precisionN, cdf, "g", label="precision of NeuroNet")
     plt.legend()
     plt.xlabel("precision")
     plt.ylabel("cdf")
@@ -178,10 +181,13 @@ def comparison_recall():
 def recall_precision():
     precisionC = csv.csv2list('./results/resultCUSUM_w.csv', 'precision')
     precisionB = csv.csv2list('./results/resultBayesian_w.csv', 'precision')
+    precisionN = csv.csv2list('./results/resultNeuroNet_w.csv', 'precision')
     recallC = csv.csv2list('./results/resultCUSUM_w.csv', 'recall')
     recallB = csv.csv2list('./results/resultBayesian_w.csv', 'recall')
+    recallN = csv.csv2list('./results/resultNeuroNet_w.csv', 'recall')
     plt.plot(precisionC, recallC, "rx", label="cusum method")
     plt.plot(precisionB, recallB, "bx", label="bayesian method")
+    plt.plot(precisionN, recallN, "gx", label="NeuroNet method")
     plt.legend()
     plt.xlabel("precision")
     plt.ylabel("recall")
@@ -190,3 +196,6 @@ def recall_precision():
     return
 
 #evaluationDataSet("./rtt_series/real_trace_labelled")
+#evaluationDataSet("./rtt_series/artificial_dataset")
+#recall_precision()
+comparison_precision()

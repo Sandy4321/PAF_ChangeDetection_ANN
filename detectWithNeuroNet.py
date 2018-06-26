@@ -11,26 +11,26 @@ import tools.csvio as csvio
 import neuroNetModelTool as md
 
 # global config
-#SEQ_LEN = 20
-#N_SAMPLE = 1000
-N_EPOCH = 50
+SAMPLE_LEN = 100
+N_EPOCH = 1000
 MTX = ['acc']
-folderName = './rtt_series/real_trace_labelled'
+folderName = './rtt_series/artificial_dataset'
 #folderName = './example'
 
 # Read data from the folder
 file_csv = os.listdir(folderName)
 x = []
 y = []
-SAMPLE_LEN = 0
+#SAMPLE_LEN = 0
 for f in file_csv:
     f = folderName + '/' + f
-    temp = csvio.csv2list(f, 'rtt')
+    temp = csvio.csv2list(f, 'trace', sep=',', decimal='.')
     x.append(temp)
-    y.append(csvio.csv2list(f, 'cp'))
+    y.append(csvio.csv2list(f, 'cpt', sep=',', decimal='.'))
 # Get the biggest value of the sample length
-    if len(temp) > SAMPLE_LEN:
-        SAMPLE_LEN = len(temp)
+#    if len(temp) > SAMPLE_LEN:
+#        SAMPLE_LEN = len(temp)
+'''
 N_SAMPLE = len(x)
 
 print('N_SAMPLE = ')
@@ -51,7 +51,23 @@ for i in range(len(x)):
     else:
         data_x.extend(x[i].tolist())
         data_y.extend(y[i].tolist())
+'''
 
+# add some zeros at the end
+data_x = []
+data_y = []
+for i in range(len(x)):
+    data_x.extend(x[i].tolist())
+    data_y.extend(y[i].tolist())
+
+N_SAMPLE = len(data_x) / SAMPLE_LEN
+reste = len(data_x) % SAMPLE_LEN
+if(reste != 0):
+	N_SAMPLE += 1
+	data_x.extend(np.zeros(SAMPLE_LEN - reste))
+	data_y.append(1)
+	data_y.extend(np.zeros(SAMPLE_LEN - reste -1))
+       
 # change list to np.array
 data_x = np.asarray(data_x)
 data_y = np.asarray(data_y)
