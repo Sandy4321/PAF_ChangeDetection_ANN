@@ -16,7 +16,7 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("detectWithNeuroNet.h5")
 print("Loaded model from disk")
 
-
+'''
 # Test for an input
 #test = np.array([189.21973,189.105955,189.0866,189.19152,189.18938,189.21477,189.363065,189.060735,189.018825,189.497595,189.460615,194.76307,196.72467,189.280095,189.014585,189.02478,189.03338,189.087215,88.99757,189.041955])
 #test = csvio.csv2list("rtt_series/real_trace_labelled/11119.csv", "rtt")
@@ -41,11 +41,27 @@ print(res)
 print(sum(res))
 '''
 # evaluate loaded model on test data
+folderName = './rtt_series/valid_data'
+SAMPLE_LEN = 100
+
+file_csv = os.listdir(folderName)
+N_SAMPLE = len(file_csv)
+X = np.array([])
+Y = np.array([])
+for f in file_csv:
+    fileName = folderName + '/' + f
+    test = csvio.csv2list(fileName, "rtt", sep=';', decimal='.')
+    cp = csvio.csv2list(fileName, "cp", sep=';', decimal='.')
+    X = np.concatenate([X, test])
+    Y = np.concatenate([Y, cp])    
+X = X.reshape(N_SAMPLE, SAMPLE_LEN, 1)
+Y = Y.reshape(N_SAMPLE, SAMPLE_LEN, 1)
 loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-score = loaded_model.evaluate(X, Y, verbose=0)
+score = loaded_model.evaluate(X, Y, verbose=1)
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
 
 
+'''
 folderName = './rtt_series/artificial_dataset'
 file_csv = os.listdir(folderName)
 precision = []
