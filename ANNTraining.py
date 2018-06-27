@@ -12,7 +12,7 @@ import neuroNetModelTool as md
 
 # global config
 SAMPLE_LEN = 100
-N_EPOCH = 1000
+N_EPOCH = 200
 MTX = ['acc']
 folderName = './rtt_series/artificial_dataset'
 #folderName = './example'
@@ -21,10 +21,13 @@ folderName = './rtt_series/artificial_dataset'
 file_csv = os.listdir(folderName)
 x = []
 y = []
+min_x = 1000
 #SAMPLE_LEN = 0
 for f in file_csv:
     f = folderName + '/' + f
     temp = csvio.csv2list(f, 'trace', sep=',', decimal='.')
+    if min_x > min(temp):
+    	min_x = min(temp)
     x.append(temp)
     y.append(csvio.csv2list(f, 'cpt', sep=',', decimal='.'))
 # Get the biggest value of the sample length
@@ -56,6 +59,12 @@ for i in range(len(x)):
 # add some zeros at the end
 data_x = []
 data_y = []
+
+# Pre-Treatment
+for i in range(len(x)):
+	for j in range(len(x[i])):
+		x[i][j] -= min_x
+
 for i in range(len(x)):
     data_x.extend(x[i].tolist())
     data_y.extend(y[i].tolist())
