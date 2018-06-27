@@ -1,13 +1,21 @@
 import os
 import tools.csvio as csv
-import cusum_first_implementation as cusum
+import classicalMethods.cusum_first_implementation as cusum
 import tools.evaluation as eval
 import matplotlib.pyplot as plt
 import numpy as np
-import baysiancpdetection as baycpd #To be removed (commented) if not needed (needs R)
+import classical_methods.baysiancpdetection as baycpd #To be removed (commented) if not needed (needs R)
+
+def binary2index(m):
+    temp = []
+    for i in range(len(m)):
+        if(m[i] == 1):
+            temp.append(i)
+    return temp
 
 
 def evaluationDataSet(folder):
+    # Use CUSUM and Bayesian to detect change point
     file_csv = os.listdir(folder)
     precisionB = []
     recallB = []
@@ -16,30 +24,16 @@ def evaluationDataSet(folder):
 
     for f in file_csv:
         f = folder + '/' + f
-        reality = csv.csv2list(f, 'trace', sep=',', decimal='.')
+        reality = csv.csv2list(f, 'rtt', sep=';', decimal='.')
 
         detectionB = baycpd.baysiancpt(reality)
         detectionC = cusum.cusum_var(reality)
-        fact = csv.csv2list(f, 'cpt', sep=',', decimal='.')
+        fact = csv.csv2list(f, 'cp', sep=';', decimal='.')
 
         # Change the binary array to index array
-        temp = []
-        for i in range(len(detectionB)):
-            if(detectionB[i] == 1):
-                temp.append(i)
-        detectionB = temp
-
-        temp = []
-        for i in range(len(detectionC)):
-            if(detectionC[i] == 1):
-                temp.append(i)
-        detectionC = temp
-
-        temp = []
-        for i in range(len(fact)):
-            if(np.abs(fact[i]-1) < 0.1):
-                temp.append(i)
-        fact = temp
+        detectionB = binary2index(detectionB)
+        detectionC = binary2index(detectionC)
+        fact = binary2index(fact)
 
         #print(fact)
 
@@ -195,7 +189,7 @@ def recall_precision():
     plt.show()
     return
 
-#evaluationDataSet("./rtt_series/real_trace_labelled")
+evaluationDataSet("./rtt_series/valid_data")
 #evaluationDataSet("./rtt_series/artificial_dataset")
-#recall_precision()
-comparison_precision()
+recall_precision()
+#comparison_precision()

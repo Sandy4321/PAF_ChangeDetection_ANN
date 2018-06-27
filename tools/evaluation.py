@@ -37,7 +37,7 @@ def evaluation(fact, detection):
 
         raise ValueError('fact and prediction are not of same length.')
 
-    if not (set(fact) == set(detection) == set([0, 1])):
+    if not (set(fact).issubset(set([0, 1])) and set(detection).issubset(set([0, 1])) ):
 
         raise ValueError('fact or/and prediction contain other value than 0/1.')
 

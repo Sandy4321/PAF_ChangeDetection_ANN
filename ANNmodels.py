@@ -30,6 +30,7 @@ def fetch_data(folder):
     y = []
     for f in file_csv:
         f = folder + '/' + f
+        # Attention for the column name, separator and decimal
         temp = csvio.csv2list(f, 'trace', sep=',', decimal='.')
         x.append(temp)
         y.append(csvio.csv2list(f, 'cpt', sep=',', decimal='.'))
