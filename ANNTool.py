@@ -1,3 +1,6 @@
+'''Two useful functions to get information about our neural network model.
+The first one saves the trained model (in h5 and json formats) and the second one plots the learning curb obtained with the training'''
+
 import numpy as np
 import time
 from keras.layers.core import Dense, Activation, Dropout
@@ -5,6 +8,7 @@ from keras.layers.recurrent import LSTM
 from keras.models import Sequential
 import matplotlib.pyplot as plt
 
+'''Function that saves the model with json and h5 formats'''
 def save_trained_model(model,fn="model"):
     """save to file the trained model
     """
@@ -15,7 +19,8 @@ def save_trained_model(model,fn="model"):
     # serialize weights to HDF5
     model.save_weights("%s.h5"%fn)
 
-def plot_leanring_curv(rec, fn='model'):
+'''Function that plots the learning curb of the training of the neural network as a pdf format'''
+def plot_leanring_curb(rec, fn='model'):
     """history of model fit
     """
     fig = plt.figure()

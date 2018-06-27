@@ -49,5 +49,6 @@ def train_model(data_x,data_y,N_EPOCH):
     history = model.fit(data_x, data_y, validation_split = 0.2,
                     epochs = N_EPOCH, batch_size = SAMPLE_LEN, verbose=1)
     print(model.summary())
-    md.save_trained_model(model, fn='detectChange')
+    md.save_trained_model(model, fn='Neural_network_for_change_detection')
+    md.plot_leanring_curb(history, fn='Neural_network_for_change_detection')
     return
