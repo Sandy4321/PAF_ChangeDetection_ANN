@@ -15,6 +15,7 @@ import ANNTool as md
 
 SAMPLE_LEN = 100 #Size of the sequences (size of each csv file)
 N_SAMPLE = 5000 #Number of sequences (the number of csv files)
+MTX = ['acc'] #Metric is accuracy
 
 
 '''Function that fetches the data
