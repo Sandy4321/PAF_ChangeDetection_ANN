@@ -1,3 +1,8 @@
+'''
+Based on the trained model, predict and validate with the validation data set
+The first function is to load the model with json and h5 file
+Then predict with one single test or evaluate with the whole validation data set
+'''
 from keras.models import model_from_json
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Dropout
