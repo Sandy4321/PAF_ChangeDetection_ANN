@@ -1,3 +1,11 @@
+'''Script that creates a model of neural network with tools from keras.
+There are two functions :
+the first one fetches the data and the second one builds and then trains the model.
+
+Projet PAF - Télécom ParisTech
+Randa Moalla, Alberto Bégué, Liang Wang, Yixiao Fei
+'''
+
 import numpy as np
 from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
