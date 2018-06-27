@@ -1,5 +1,9 @@
 '''Two useful functions to get information about our neural network model.
-The first one saves the trained model (in h5 and json formats) and the second one plots the learning curb obtained with the training'''
+The first one saves the trained model (in h5 and json formats) and the second one plots the learning curb obtained with the training
+
+Projet PAF - Télécom ParisTech
+Randa Moalla, Alberto Bégué, Liang Wang, Yixiao Fei
+'''
 
 import numpy as np
 import time
@@ -20,7 +24,7 @@ def save_trained_model(model,fn="model"):
     model.save_weights("%s.h5"%fn)
 
 '''Function that plots the learning curb of the training of the neural network as a pdf format'''
-def plot_leanring_curb(rec, fn='model'):
+def plot_learning_curb(rec, fn='model'):
     """history of model fit
     """
     fig = plt.figure()
@@ -30,7 +34,7 @@ def plot_leanring_curb(rec, fn='model'):
     ax.set_xlabel('epoch')
     ax.legend(rec.history.keys(), loc='upper left')
     fig.set_size_inches(10,8)
-    plt.savefig("%s_learning_curve.pdf"%fn, format='pdf')
+    plt.savefig("%s_learning_curb.pdf"%fn, format='pdf')
     plt.close()
 
 

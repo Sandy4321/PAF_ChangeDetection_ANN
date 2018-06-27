@@ -55,7 +55,7 @@ def train_model(data_x,data_y,N_EPOCH):
                     epochs = N_EPOCH, batch_size = SAMPLE_LEN, verbose=1)
     print(model.summary())
     md.save_trained_model(model, fn='Neural_network_for_change_detection')
-    md.plot_leanring_curb(history, fn='Neural_network_for_change_detection')
+    md.plot_learning_curb(history, fn='Neural_network_for_change_detection')
     return model
 
 x,y=fetch_data("./rtt_series/artificial_dataset" )
