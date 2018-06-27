@@ -69,7 +69,8 @@ def evaluation(fact, detection):
 
     recall =    float(tp)/(tp+fn+0.000000001)
 
-    if (float(tp)/(tp+fp+0.000000001)>0.999):
+
+    if (float(tp)/(tp+fp+0.000000001)>0.9999):
 
         precision =1
 
