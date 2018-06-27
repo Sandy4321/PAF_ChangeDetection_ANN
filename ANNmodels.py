@@ -54,13 +54,12 @@ def train_model(data_x,data_y,N_EPOCH):
     history = model.fit(data_x, data_y, validation_split = 0.2,
                     epochs = N_EPOCH, batch_size = SAMPLE_LEN, verbose=1)
     print(model.summary())
-<<<<<<< Updated upstream
     md.save_trained_model(model, fn='Neural_network_for_change_detection')
     md.plot_leanring_curb(history, fn='Neural_network_for_change_detection')
     return model
 
 x,y=fetch_data("./rtt_series/artificial_dataset" )
 model=train_model(x,y,10)
-from keras.utils import plot_model
-plot_model(model, to_file='model.png')
+'''from keras.utils import plot_model
+plot_model(model, to_file='model.png')'''
 
