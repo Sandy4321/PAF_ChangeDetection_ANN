@@ -65,7 +65,20 @@ def evaluation(fact, detection):
 
                 fp += 1
 
-    return dict(tp=tp, fp=fp, fn=fn, tn=tn, precision=float(tp)/(tp+fp), recall=float(tp)/(tp+fn))
+    precision =float(tp)/(tp+fp+0.000000001)
+
+    recall =    float(tp)/(tp+fn+0.000000001)
+
+    if (float(tp)/(tp+fp+0.000000001)>0.999):
+
+        precision =1
+
+    if (float(tp)/(tp+fn+0.000000001)>0.9999):
+
+        recall =1
+
+
+    return dict(tp=tp, fp=fp, fn=fn, tn=tn, precision=precision, recall=recall)
 
 
 
