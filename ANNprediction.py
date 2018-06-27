@@ -81,6 +81,7 @@ def model_evaluate(loaded_model, folderName='./rtt_series/valid_data'):
                          optimizer='adam', metrics=['accuracy'])
     score = loaded_model.evaluate(X, Y, verbose=1)
     print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
+    print("%s: %.2f" % (loaded_model.metrics_names[0], score[0]*100))
 
 
 def model_evaluate2precision_recall(loaded_model, folderName='./rtt_series/valid_data', resultName='./results/resultNeuroNet_w.csv'):
@@ -134,6 +135,6 @@ def model_evaluate2precision_recall(loaded_model, folderName='./rtt_series/valid
 
 
 model = load_model("detectWithNeuroNetWithPreTreat")
-single_test(model)
+#single_test(model)
 model_evaluate(model)
 #model_evaluate2precision_recall(model, resultName='./results/resultNeuroNet.csv')
