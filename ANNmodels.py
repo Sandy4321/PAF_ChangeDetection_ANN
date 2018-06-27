@@ -48,18 +48,18 @@ Args : (data_x, data_y, number of epochs
 '''
 def train_model(data_x,data_y,N_EPOCH):
     model=Sequential()
-    model.add(LSTM(15, return_sequences = False, input_shape = ( 100,1)))
+    model.add(LSTM(30, return_sequences = False, input_shape = ( 100,1)))
     model.add(Dense(1, activation = 'sigmoid'))
     model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = MTX)
     history = model.fit(data_x, data_y, validation_split = 0.2,
                     epochs = N_EPOCH, batch_size = SAMPLE_LEN, verbose=1)
     print(model.summary())
-    md.save_trained_model(model, fn='Neural_network_for_change_detection')
-    md.plot_learning_curb(history, fn='Neural_network_for_change_detection')
+    md.save_trained_model(model, fn='Neural_network_for_change_detection1')
+    md.plot_learning_curb(history, fn='Neural_network_for_change_detection1')
     return model
 
 x,y=fetch_data("./rtt_series/artificial_dataset" )
-model=train_model(x,y,10)
+model=train_model(x,y,50)
 '''from keras.utils import plot_model
 plot_model(model, to_file='model.png')'''
 
