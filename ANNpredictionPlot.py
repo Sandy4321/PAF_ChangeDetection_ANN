@@ -1,18 +1,17 @@
 
 import os
-
 import ANNprediction as ap
 import matplotlib.pyplot as plt
 
-precision=[]
-recall=[]
-key_list=[]
-value_list=[]
-path_original = "rtt_series/valid_data/"
+precision = []
+recall = []
+key_list = []
+value_list = []
+path_original = "rtt_series/real_trace_labelled/"
 for (path_original, dirs, files) in os.walk(path_original):
     for file in files:
         model = ap.load_model("detectWithNeuroNetWithPreTreat")
-        a =ap.single_test(model,fileName=path_original+file)
+        a = ap.single_test(model,fileName=path_original+file)
         precision.append(a['precision'])
         print("precision is : ",precision)
         recall.append(a['recall'])
@@ -21,8 +20,8 @@ for (path_original, dirs, files) in os.walk(path_original):
 '''
 '''
 plt.figure()
-ax1=plt.subplot(211)
-ax2=plt.subplot(212)
+ax1 = plt.subplot(211)
+ax2 = plt.subplot(212)
 plt.sca(ax1)
 plt.hist( precision,color='r')
 plt.title('distribution of precision ')
